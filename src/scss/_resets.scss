@@ -1,11 +1,9 @@
-:root {
-  --black: #222222;
-}
+$black: #222222;
 
 html {
   box-sizing: border-box;
   font-size: 10px;
-  color: var(--black);
+  color: $black;
 }
 
 *,
