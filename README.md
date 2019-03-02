@@ -1,4 +1,4 @@
-![React Stocks logo](src/img/react-stock.svg)
+![React Stocks logo](./src/img/react-stock.svg)
 
 # React Stocks
 
