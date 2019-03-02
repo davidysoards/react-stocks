@@ -1,3 +1,5 @@
+## THIS PROJECT IS A WORK IN PROGRESS! DON'T JUDGE ME... YET
+
 ![React Stocks logo](src/img/react-stocks.svg)
 
 # React Stocks
@@ -6,7 +8,7 @@ This project is deployed via GitHub pages at [React Stocks](https://davidysoards
 
 ## Create React App
 
-This project was created using 'create-react-app'
+This project was created using 'create-react-app'.
 
 ## Sass & BEM
 
