@@ -1,0 +1,15 @@
+.featured-stock {
+  padding: 1rem;
+  &__name {
+    font-weight: 500;
+    color: $text-gray;
+  }
+  &__price {
+    font-size: 3.2rem;
+    font-weight: 700;
+  }
+  &__change {
+    font-weight: 500;
+    font-size: 1.8rem;
+  }
+}

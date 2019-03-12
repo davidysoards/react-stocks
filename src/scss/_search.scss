@@ -1,0 +1,58 @@
+.searchForm {
+  background: #000;
+  position: relative;
+  min-width: 450px;
+  &__inputs {
+    display: flex;
+    justify-content: space-around;
+    input {
+      height: 40px;
+    }
+  }
+  &__text {
+    flex: 9;
+    padding-left: 1rem;
+  }
+  &__clear {
+    flex: 1;
+    border: 0;
+    z-index: 50;
+    position: absolute;
+    right: 0;
+    top: 0;
+    margin: 1em 0.5em;
+    font-size: 0.8em;
+    color: $text-gray;
+    font-weight: 500;
+  }
+  &__results {
+    z-index: 99;
+    position: absolute;
+    width: 100%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    border: 1px solid $black;
+    background: white;
+    max-height: 480px;
+    overflow: auto;
+  }
+  &__result {
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    padding: 1rem;
+    margin: 0;
+    &:hover,
+    &.active {
+      background-color: rgba($react-blue, 0.1);
+    }
+  }
+  &__resultSymbol {
+    font-weight: 700;
+  }
+  &__resultName {
+    padding-left: 1em;
+    color: $text-gray;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+}

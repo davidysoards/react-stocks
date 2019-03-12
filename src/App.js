@@ -1,145 +1,160 @@
 import React, { Component } from 'react';
-import logo from './img/react-stocks-land.svg';
 import './App.scss';
+import axios from 'axios';
+import { get } from './js/utils';
+import logo from './img/react-stocks-land.svg';
+import Search from './js/Search';
+import Featured from './js/Featured';
+import Quote from './js/Quote';
+import Favorites from './js/Favorites';
 
 class App extends Component {
+  state = {
+    featuredStocks: [],
+    favoriteStocks: [],
+    quoteSymbol: '',
+    quote: {},
+    loading: false,
+    searchResults: null,
+    searchValue: '',
+    cursor: 0,
+  };
+
+  componentDidMount() {
+    this.getFeaturedStocks('^DJI,^SP400,^IXIC,^RUT');
+    this.handleQuoteChange('AAPL');
+  }
+
+  getFeaturedStocks = async symbol => {
+    const featuredStocks = await this.getStockData(symbol);
+    this.setState({ featuredStocks });
+    console.log(featuredStocks);
+  };
+
+  handleQuoteChange = async symbol => {
+    const data = await this.getStockData(symbol);
+    const quote = data[0];
+    console.log(quote);
+    this.setState({ quote, quoteSymbol: symbol });
+    this.clearSearch();
+  };
+
+  getStockData = async val => {
+    this.setState({ loading: true });
+    try {
+      const res = await axios(
+        `https://www.worldtradingdata.com/api/v1/stock?symbol=${val}&api_token=J5Kh3eJUGOQ7Qj1tTVSjIcm6azCpvbRd6roOoMk23TLVpudmFuKlMDjkQVUq`
+      );
+      const data = res.data.data;
+      this.setState({ loading: false });
+      return data;
+    } catch (err) {
+      console.log('Error fetching stock data', err);
+    }
+  };
+
+  search = async val => {
+    try {
+      const res = await get(
+        `https://www.worldtradingdata.com/api/v1/stock_search?search_term=${val}&search_by=symbol,name&limit=50&page=1&api_token=J5Kh3eJUGOQ7Qj1tTVSjIcm6azCpvbRd6roOoMk23TLVpudmFuKlMDjkQVUq`
+      );
+      const searchResults = res.data;
+      this.setState({ searchResults });
+    } catch (err) {
+      console.log('No search results');
+    }
+  };
+
+  handleSearchChange = e => {
+    document.addEventListener('click', event => {
+      if (event.target.closest('.searchForm')) return;
+      this.clearSearch();
+    });
+    this.search(e.target.value);
+    this.setState({ searchValue: e.target.value });
+  };
+
+  clearSearch = () => {
+    this.setState({ searchValue: '', cursor: 0 });
+  };
+
+  handleSearchKeyDowns = e => {
+    const { cursor, searchResults } = this.state;
+    // Up Arrow
+    if (e.keyCode === 38 && cursor > 0) {
+      this.setState(prevState => ({ cursor: prevState.cursor - 1 }));
+      // Down Arrow
+    } else if (e.keyCode === 40 && cursor < searchResults.length - 1) {
+      this.setState(prevState => ({ cursor: prevState.cursor + 1 }));
+      // Return
+    } else if (e.keyCode === 13) {
+      e.preventDefault();
+      this.handleQuoteChange(searchResults[cursor].symbol);
+      // Esc
+    } else if (e.keyCode === 27) {
+      this.clearSearch();
+    }
+  };
+
   render() {
+    const {
+        cursor,
+        featuredStocks,
+        quoteSymbol,
+        quote,
+        searchValue,
+        searchResults,
+      } = this.state,
+      upColor = '#1ac567',
+      downColor = '#ff333a',
+      currentQuoteColor = quote.day_change >= 0 ? upColor : downColor;
     return (
       <div className="l-site-container">
-        <header>
+        <header className="header">
           <div className="l-header-grid">
-            <img src={logo} alt="react stocks logo" width="300px" />
-            <form className="searchForm">
-              <div className="searchForm__inputs">
-                <input type="text" className="searchForm__text" />
-                <input
-                  type="submit"
-                  value="Search"
-                  className="searchForm__submit"
-                />
-              </div>
-            </form>
+            <div className="l-header-grid__logo">
+              <img src={logo} alt="react stocks logo" width="300px" />
+            </div>
+            <div className="l-header-grid__search">
+              <Search
+                clearSearch={this.clearSearch}
+                cursor={cursor}
+                searchValue={searchValue}
+                searchResults={searchResults}
+                handleSearchChange={this.handleSearchChange}
+                handleQuoteChange={this.handleQuoteChange}
+                handleSearchKeyDowns={this.handleSearchKeyDowns}
+              />
+            </div>
           </div>
         </header>
-        <main>
-          <div className="l-main-grid">
-            <div className="l-main-grid__featured">
-              <div className="l-featured-container">
-                <div className="l-featured-container__item">
-                  <button className="featured-button--left">back</button>
-                </div>
-                <div className="l-featured-container__item">
-                  <ul className="featured-stock">
-                    <li className="featured-stock__name">
-                      Dow Jones Industrial
-                    </li>
-                    <li className="featured-stock__price">26031.67</li>
-                    <li className="featured-stock__change">+17.79 (+0.64%)</li>
-                  </ul>
-                </div>
-                <div className="l-featured-container__item">
-                  <ul className="featured-stock">
-                    <li className="featured-stock__name">
-                      Dow Jones Industrial
-                    </li>
-                    <li className="featured-stock__price">26031.67</li>
-                    <li className="featured-stock__change">+17.79 (+0.64%)</li>
-                  </ul>
-                </div>
-                <div className="l-featured-container__item">
-                  <ul className="featured-stock">
-                    <li className="featured-stock__name">
-                      Dow Jones Industrial
-                    </li>
-                    <li className="featured-stock__price">26031.67</li>
-                    <li className="featured-stock__change">+17.79 (+0.64%)</li>
-                  </ul>
-                </div>
-                <div className="l-featured-container__item">
-                  <ul className="featured-stock">
-                    <li className="featured-stock__name">
-                      Dow Jones Industrial
-                    </li>
-                    <li className="featured-stock__price">26031.67</li>
-                    <li className="featured-stock__change">+17.79 (+0.64%)</li>
-                  </ul>
-                </div>
-                <div className="l-featured-container__item">
-                  <ul className="featured-stock">
-                    <li className="featured-stock__name">
-                      Dow Jones Industrial
-                    </li>
-                    <li className="featured-stock__price">26031.67</li>
-                    <li className="featured-stock__change">+17.79 (+0.64%)</li>
-                  </ul>
-                </div>
-                <div className="l-featured-container__item">
-                  <button className="featured-button--right">forward</button>
-                </div>
-              </div>
-            </div>
-
-            <div className="l-main-grid__highlight">
-              <ul className="hightlight">
-                <li className="hightlight__name">Alphabet Inc ClassName C</li>
-                <li className="hightlight__symbol">GOOG</li>
-                <li className="hightlight__price">1110.37</li>
-                <li className="hightlight__change">+13.40 (1.22)%</li>
-                <li className="hightlight__open">
-                  <span>Open</span>
-                  <span>1100.90</span>
-                </li>
-                <li className="hightlight__dayRange">
-                  <span>Day's Range</span>
-                  <span>970.11 - 1273.89</span>
-                </li>
-                <li className="hightlight__yearRange">
-                  <span>52 Week Range</span>
-                  <span>1095.60 - 1111.24</span>
-                </li>
-                <li className="hightlight__volume">
-                  <span>Volume</span>
-                  <span>1049545</span>
-                </li>
-                <li className="hightlight__avgVolume">
-                  <span>Avg. Volume</span>
-                  <span>1466296</span>
-                </li>
-              </ul>
+        <section className="featured">
+          <Featured
+            featuredStocks={featuredStocks}
+            upColor={upColor}
+            downColor={downColor}
+          />
+        </section>
+        <main className="main">
+          <div
+            className="l-main-grid"
+            style={{ borderTop: `solid 1rem ${currentQuoteColor}` }}
+          >
+            <div className="l-main-grid__quote">
+              <Quote
+                quoteSymbol={quoteSymbol}
+                quote={quote}
+                upColor={upColor}
+                downColor={downColor}
+              />
             </div>
             <div className="l-main-grid__favorites">
-              <table className="favorites">
-                <thead>
-                  <tr>
-                    <th>Symbol</th>
-                    <th>Price</th>
-                    <th>% Change</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>
-                      <p>FB</p>
-                      <p>Facebook</p>
-                    </td>
-                    <td>161.89</td>
-                    <td>+1.16</td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <p>FB</p>
-                      <p>Facebook</p>
-                    </td>
-                    <td>161.89</td>
-                    <td>+1.16</td>
-                  </tr>
-                </tbody>
-              </table>
+              <Favorites upColor={upColor} downColor={downColor} />
             </div>
           </div>
         </main>
-        <footer>
-          <div>© 2019 David Y. Soards</div>
+        <footer className="footer">
+          <div className="l-footer-container">© 2019 David Y. Soards</div>
         </footer>
       </div>
     );
