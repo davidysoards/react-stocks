@@ -1,6 +1,6 @@
 .l-quote-grid {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-gap: 1em;
 }
 
 .quote-border {
@@ -30,5 +30,30 @@
   }
   &__exchange {
     font-size: 1.8rem;
+  }
+}
+
+// .quote-details-list {
+//   display: grid;
+//   grid-gap: 1em;
+//   &__item {
+//     display: grid;
+//     grid-template-columns: 1fr 1fr;
+//   }
+// }
+
+.quote-details-table {
+  width: 100%;
+  font-size: 1.2em;
+  line-height: 2;
+  td:first-child {
+    color: $text-gray;
+  }
+  td:last-child {
+    font-weight: 600;
+    text-align: right;
+  }
+  tr {
+    border-bottom: 1px solid $med-gray;
   }
 }

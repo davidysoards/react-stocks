@@ -35,28 +35,52 @@ const Quote = ({ quote, upColor, downColor }) => {
         </ul>
       </div>
       <div className="l-quote-grid__details">
-        <ul className="quote-details">
-          <li className="quote-details__open">
+        <table className="quote-details-table">
+          <tbody>
+            <tr>
+              <td>Open</td>
+              <td>{price_open}</td>
+            </tr>
+            <tr>
+              <td>Day's Range</td>
+              <td>{`${day_low} - ${day_high}`}</td>
+            </tr>
+            <tr>
+              <td>52 Week Range</td>
+              <td>{`${year_low} - ${year_high}`}</td>
+            </tr>
+            <tr>
+              <td>Volume</td>
+              <td>{volume}</td>
+            </tr>
+            <tr>
+              <td>Avg. Volume</td>
+              <td>{volume_avg}</td>
+            </tr>
+          </tbody>
+        </table>
+        {/* <ul className="quote-details-list">
+          <li className="quote-details-list__item">
             <span>Open</span>
             <span>{price_open}</span>
           </li>
-          <li className="quote-details__dayRange">
+          <li className="quote-details-list__item">
             <span>Day's Range</span>
             <span>{`${day_low} - ${day_high}`}</span>
           </li>
-          <li className="quote-details__yearRange">
+          <li className="quote-details-list__item">
             <span>52 Week Range</span>
             <span>{`${year_low} - ${year_high}`}</span>
           </li>
-          <li className="quote-details__volume">
+          <li className="quote-details-list__item">
             <span>Volume</span>
             <span>{volume}</span>
           </li>
-          <li className="quote-details__avgVolume">
+          <li className="quote-details-list__item">
             <span>Avg. Volume</span>
             <span>{volume_avg}</span>
           </li>
-        </ul>
+        </ul> */}
       </div>
     </div>
   );

@@ -3,30 +3,33 @@ import React from 'react';
 
 const Favorites = props => {
   return (
-    <table className="favorites">
-      <thead>
-        <tr>
-          <th colSpan={3}>Favorites</th>
-        </tr>
-        <tr>
-          <th>Symbol</th>
-          <th>Price</th>
-          <th>% Change</th>
-        </tr>
-      </thead>
+    <table className="favorites-table">
       <tbody>
         <tr>
+          <th className="favorites-table__header" colSpan={3}>
+            Favorites
+          </th>
+        </tr>
+
+        <tr className="favorites-table__labels">
+          <td>Symbol</td>
+          <td>Price</td>
+          <td>% Change</td>
+        </tr>
+        <tr>
           <td>
-            <p>FB</p>
-            <p>Facebook</p>
+            <span className="favorites-table__symbol">FB</span>
+            <br />
+            <span className="favorites-table__name">Facebook</span>
           </td>
           <td>161.89</td>
           <td>+1.16</td>
         </tr>
         <tr>
           <td>
-            <p>FB</p>
-            <p>Facebook</p>
+            <span className="favorites-table__symbol">FB</span>
+            <br />
+            <span className="favorites-table__name">Facebook</span>
           </td>
           <td>161.89</td>
           <td>+1.16</td>

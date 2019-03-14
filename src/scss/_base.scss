@@ -22,7 +22,7 @@
   margin: 1rem auto;
   flex-direction: column;
   align-items: center;
-  @media (min-width: 768px) {
+  @include bp(med) {
     flex-direction: row;
     justify-content: center;
   }
@@ -32,23 +32,22 @@
 }
 
 .l-main-grid {
-  display: flex;
+  display: grid;
+  grid-gap: 1em;
   max-width: $container-width;
   margin: 0 auto;
   flex-direction: column;
-  align-items: center;
-  @media (min-width: 768px) {
+  @include bp(med) {
     display: grid;
-    grid-template-columns: 4fr 1fr;
-    grid-gap: 2rem;
-    // &__quote {
-    //   flex: 3;
-    // }
-    // &__favorites {
-    //   flex: 1;
-    //   display: flex;
-    //   justify-content: flex-end;
-    // }
+    grid-template-columns: 2fr 1fr;
+    grid-gap: 3em;
+  }
+  &__quote,
+  &__favorites {
+    margin: 0.6em;
+    @include bp(med) {
+      margin: 1em 0;
+    }
   }
 }
 
@@ -69,10 +68,4 @@
   max-width: $container-width;
   color: white;
   margin: 1rem auto;
-}
-
-table,
-th,
-td {
-  border: 1px solid black;
 }

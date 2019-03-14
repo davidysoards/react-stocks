@@ -1,0 +1,33 @@
+.favorites-table {
+  table-layout: fixed;
+  width: 100%;
+  line-height: 1.3;
+  td {
+    padding: 0.5em 0;
+  }
+  tr {
+    border-bottom: 1px solid $med-gray;
+  }
+  td:last-child,
+  th:nth-child(3) {
+    text-align: right;
+  }
+  th:first-child {
+    text-align-last: left;
+  }
+  td:nth-child(2) {
+    text-align-last: center;
+  }
+  &__header {
+    padding-bottom: 0.5em;
+    background-bottom: none;
+    font-size: 1.2em;
+  }
+  &__symbol {
+    font-weight: 700;
+  }
+  &__labels,
+  &__name {
+    color: $text-gray;
+  }
+}
