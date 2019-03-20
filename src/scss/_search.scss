@@ -1,7 +1,21 @@
+.search-container {
+  // padding: 1rem;
+  background: $light-gray;
+  height: 110px;
+  display: grid;
+  align-content: center;
+  @include bp(med) {
+    padding: 0 3rem;
+  }
+}
+
 .searchForm {
+  margin: 3rem 1rem;
+  @include bp(small) {
+    margin: 3rem;
+  }
   background: #000;
   position: relative;
-  min-width: 450px;
   &__inputs {
     display: flex;
     justify-content: space-around;

@@ -1,4 +1,4 @@
-.l-quote-grid {
+.quote-grid {
   display: grid;
   grid-gap: 1em;
 }
@@ -32,15 +32,6 @@
     font-size: 1.8rem;
   }
 }
-
-// .quote-details-list {
-//   display: grid;
-//   grid-gap: 1em;
-//   &__item {
-//     display: grid;
-//     grid-template-columns: 1fr 1fr;
-//   }
-// }
 
 .quote-details-table {
   width: 100%;

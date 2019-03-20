@@ -3,27 +3,25 @@ import PropTypes from 'prop-types';
 
 const Featured = ({ featuredStocks, upColor, downColor }) => {
   return (
-    <div className="l-featured-container">
-      {/* <div className="l-featured-container__item">
-        <button className="featured-button--left">back</button>
-      </div> */}
+    <div className="featured-container">
       {featuredStocks.map(stock => {
-        const color = stock.day_change >= 0 ? upColor : downColor;
+        const { symbol, name, price, day_change, change_pct } = stock;
+        const color = day_change >= 0 ? upColor : downColor;
         return (
-          <div className="l-featured-container__item" key={stock.symbol}>
+          <div className="featured-container__item" key={symbol}>
             <ul className="featured-stock">
-              <li className="featured-stock__name">{stock.name}</li>
-              <li className="featured-stock__price">{stock.price}</li>
+              <li className="featured-stock__name">
+                {/* {name.substr(0, name.indexOf(' ')).toUpperCase()} */}
+                {name}
+              </li>
+              <li className="featured-stock__price">{price}</li>
               <li className="featured-stock__change" style={{ color: color }}>
-                {`${stock.day_change} (${stock.change_pct}%)`}
+                {`${day_change} (${change_pct}%)`}
               </li>
             </ul>
           </div>
         );
       })}
-      {/* <div className="l-featured-container__item">
-        <button className="featured-button--right">forward</button>
-      </div> */}
     </div>
   );
 };

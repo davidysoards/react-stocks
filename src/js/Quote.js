@@ -2,25 +2,16 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const Quote = ({ quote, upColor, downColor }) => {
+  // prettier-ignore
   const {
-      name,
-      symbol,
-      price,
-      stock_exchange_long,
-      day_change,
-      change_pct,
-      price_open,
-      day_high,
-      day_low,
-      volume,
-      volume_avg,
-    } = quote,
+    name, symbol, price, stock_exchange_long, day_change, change_pct, price_open, day_high, day_low, volume, volume_avg,
+  } = quote,
     year_high = quote['52_week_high'],
     year_low = quote['52_week_low'],
     color = day_change >= 0 ? upColor : downColor;
   return (
-    <div className="l-quote-grid">
-      <div className="l-quote-grid__header">
+    <div className="quote-grid">
+      <div className="quote-grid__header">
         <ul className="quote-header">
           <li className="quote-header__name-and-symbol">
             <span className="quote-header__name">{name}</span>
@@ -34,7 +25,7 @@ const Quote = ({ quote, upColor, downColor }) => {
           >{`${day_change} (${change_pct})%`}</li>
         </ul>
       </div>
-      <div className="l-quote-grid__details">
+      <div className="quote-grid__details">
         <table className="quote-details-table">
           <tbody>
             <tr>
@@ -59,28 +50,6 @@ const Quote = ({ quote, upColor, downColor }) => {
             </tr>
           </tbody>
         </table>
-        {/* <ul className="quote-details-list">
-          <li className="quote-details-list__item">
-            <span>Open</span>
-            <span>{price_open}</span>
-          </li>
-          <li className="quote-details-list__item">
-            <span>Day's Range</span>
-            <span>{`${day_low} - ${day_high}`}</span>
-          </li>
-          <li className="quote-details-list__item">
-            <span>52 Week Range</span>
-            <span>{`${year_low} - ${year_high}`}</span>
-          </li>
-          <li className="quote-details-list__item">
-            <span>Volume</span>
-            <span>{volume}</span>
-          </li>
-          <li className="quote-details-list__item">
-            <span>Avg. Volume</span>
-            <span>{volume_avg}</span>
-          </li>
-        </ul> */}
       </div>
     </div>
   );

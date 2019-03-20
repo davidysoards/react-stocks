@@ -1,4 +1,4 @@
-.l-site-container {
+.app-container {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
@@ -10,6 +10,7 @@
   }
   .main {
     flex: 1;
+    padding: 1rem;
   }
   .footer {
     flex-shrink: 0;
@@ -17,53 +18,59 @@
   }
 }
 
-.l-header-grid {
+.header-grid {
   display: flex;
   margin: 1rem auto;
   flex-direction: column;
   align-items: center;
+  max-width: $container-width;
+  padding: 1rem;
+  &__logo {
+    display: block;
+    background: url('./img/react-stocks.svg') no-repeat center;
+    width: 160px;
+    height: 160px;
+    background-size: contain;
+    @include bp(med) {
+      background: url('./img/react-stocks-land.svg') no-repeat left;
+      width: 324px;
+      height: 60px;
+      margin-left: -1rem;
+    }
+  }
   @include bp(med) {
     flex-direction: row;
-    justify-content: center;
-  }
-  &__search {
-    margin-left: 2em;
+    justify-content: space-between;
+    &__nav {
+      margin-left: 2em;
+    }
   }
 }
-
-.l-main-grid {
+.header-nav {
   display: grid;
-  grid-gap: 1em;
-  max-width: $container-width;
-  margin: 0 auto;
-  flex-direction: column;
-  @include bp(med) {
-    display: grid;
-    grid-template-columns: 2fr 1fr;
-    grid-gap: 3em;
-  }
-  &__quote,
-  &__favorites {
-    margin: 0.6em;
-    @include bp(med) {
-      margin: 1em 0;
+  color: white;
+  font-weight: 600;
+  grid-template-columns: repeat(3, auto);
+  grid-gap: 3rem;
+  & a {
+    color: white;
+    text-decoration: none;
+    &:hover {
+      opacity: 0.7;
     }
   }
 }
 
-.l-featured-container {
-  display: flex;
-  flex-basis: 100%;
-  max-width: $container-width;
+.markets-grid,
+.stock-grid,
+.forex-grid {
   margin: 0 auto;
-  justify-content: space-between;
-  align-items: center;
-  background: $light-gray;
-  &__item {
-  }
+  display: grid;
+  grid-gap: 1rem;
+  max-width: $container-width;
 }
 
-.l-footer-container {
+.footer-container {
   text-align: center;
   max-width: $container-width;
   color: white;
