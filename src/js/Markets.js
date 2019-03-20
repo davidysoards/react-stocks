@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import Featured from './Featured';
+import Quote from './Quote';
 import PropTypes from 'prop-types';
 
 export default class Markets extends Component {
@@ -12,13 +13,27 @@ export default class Markets extends Component {
   state = {
     isLoading: true,
     featuredStocks: [],
+    quote: {},
+    quoteSymbol: '',
+    quoteIsLoading: true,
   };
 
   componentDidMount() {
-    this.getFeaturedStocks('^DJI,^SP400,^IXIC').then(() =>
-      this.setState({ isLoading: false })
+    this.getFeaturedStocks('^DJI,^SP400,^IXIC').then(
+      () =>
+        // this.handleQuoteChange('^DJI').then(() =>
+        this.setState({ isLoading: false })
+      // )
     );
   }
+
+  handleQuoteChange = async symbol => {
+    const data = await this.getStockData(symbol);
+    const quote = data[0];
+    console.log(quote);
+    this.setState({ quote, quoteSymbol: symbol });
+    this.setState({ quoteIsLoading: false });
+  };
 
   getStockData = async val => {
     try {
@@ -33,15 +48,14 @@ export default class Markets extends Component {
   };
 
   getFeaturedStocks = async symbol => {
-    // this.setState({ loading: true });
     const featuredStocks = await this.getStockData(symbol);
     this.setState({ featuredStocks });
     console.log(featuredStocks);
-    // this.setState({ loading: false });
   };
   render() {
-    const { featuredStocks, isLoading } = this.state;
-    const { upColor, downColor } = this.props;
+    const { featuredStocks, isLoading, quote, quoteIsLoading } = this.state,
+      { upColor, downColor } = this.props,
+      currentQuoteColor = quote.day_change >= 0 ? upColor : downColor;
     if (isLoading) return null;
     return (
       <div className="markets-grid">
@@ -49,16 +63,21 @@ export default class Markets extends Component {
           <h2>Market Overview</h2>
         </div>
         <div className="markets-grid__overview">
-          {/* <section className="section-container">overview</section> */}
           <Featured
             featuredStocks={featuredStocks}
             upColor={upColor}
             downColor={downColor}
+            handleQuoteChange={this.handleQuoteChange}
           />
         </div>
-        <div className="markets-grid__details">
-          <section className="primary-container">primary</section>
-        </div>
+        {quoteIsLoading ? null : (
+          <div
+            className="markets-grid__details"
+            style={{ borderTop: `solid 1rem ${currentQuoteColor}` }}
+          >
+            <Quote upColor={upColor} downColor={downColor} quote={quote} />
+          </div>
+        )}
       </div>
     );
   }

@@ -33,7 +33,7 @@ class App extends Component {
                     <Link to="/">Markets</Link>
                   </li>
                   <li className="header-nav__item">
-                    <Link to="/stock">Get Quote</Link>
+                    <Link to="/stock">Stock Quote</Link>
                   </li>
                   <li className="header-nav__item">
                     <Link to="/forex">Forex</Link>

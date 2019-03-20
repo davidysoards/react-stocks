@@ -1,7 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const Featured = ({ featuredStocks, upColor, downColor }) => {
+const Featured = ({
+  featuredStocks,
+  handleQuoteChange,
+  upColor,
+  downColor,
+}) => {
   return (
     <div className="featured-container">
       {featuredStocks.map(stock => {
@@ -9,7 +14,13 @@ const Featured = ({ featuredStocks, upColor, downColor }) => {
         const color = day_change >= 0 ? upColor : downColor;
         return (
           <div className="featured-container__item" key={symbol}>
-            <ul className="featured-stock">
+            <ul
+              className="featured-stock"
+              onClick={() => {
+                handleQuoteChange(symbol);
+              }}
+              style={{ cursor: 'pointer' }}
+            >
               <li className="featured-stock__name">
                 {/* {name.substr(0, name.indexOf(' ')).toUpperCase()} */}
                 {name}

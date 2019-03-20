@@ -101,7 +101,7 @@ export default class Stock extends Component {
     return (
       <div className="stock-grid">
         <div className="stock-grid__heading">
-          <h2>Get Stock Quote</h2>
+          <h2>Get a Stock Quote</h2>
         </div>
         <div className="stock-grid__search">
           <Search

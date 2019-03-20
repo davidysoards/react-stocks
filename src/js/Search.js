@@ -49,6 +49,7 @@ const Search = ({
                   onClick={() => {
                     handleQuoteChange(symbol);
                   }}
+                  style={{ cursor: 'pointer' }}
                 >
                   <li className="searchForm__resultSymbol">{symbol}</li>
                   <li className="searchForm__resultName">{name}</li>
