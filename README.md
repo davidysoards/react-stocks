@@ -1,6 +1,6 @@
 ## THIS PROJECT IS A WORK IN PROGRESS! DON'T JUDGE ME... YET
 
-![React Stocks logo](src/img/react-stocks.svg)
+![React Stocks logo](src/img/react-stocks-land-black.svg)
 
 # React Stocks
 
