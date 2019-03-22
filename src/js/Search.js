@@ -21,6 +21,7 @@ const Search = ({
             value={searchValue}
             onChange={e => handleSearchChange(e)}
             onKeyDown={handleSearchKeyDowns}
+            onBlur={clearSearch}
           />
           {searchValue !== '' && (
             <button

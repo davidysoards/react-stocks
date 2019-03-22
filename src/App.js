@@ -7,25 +7,16 @@ import Stock from './js/Stock';
 import Forex from './js/Forex';
 
 class App extends Component {
-  state = {
-    isLoading: true,
-  };
-
-  componentDidMount() {
-    this.setState({ isLoading: false });
-  }
-
   render() {
-    const { isLoading } = this.state,
-      upColor = '#1ac567',
+    const upColor = '#1ac567',
       downColor = '#ff333a';
 
-    if (isLoading) return null;
     return (
       <Router>
         <div className="app-container">
           <header className="header">
             <div className="header-grid">
+              {/* =Logo div - uses CSS background-image */}
               <div className="header-grid__logo" />
               <div className="header-grid__nav">
                 <ul className="header-nav">
@@ -42,6 +33,7 @@ class App extends Component {
               </div>
             </div>
           </header>
+          {/* =Begin Content */}
           <main className="main">
             <Route
               exact
@@ -59,6 +51,7 @@ class App extends Component {
             />
             <Route path="/forex" component={Forex} />
           </main>
+          {/* =End Content */}
           <footer className="footer">
             <div className="footer-container">© 2019 David Y. Soards</div>
           </footer>

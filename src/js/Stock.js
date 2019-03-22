@@ -15,32 +15,21 @@ export default class Stock extends Component {
     cursor: 0,
     searchValue: '',
     searchResults: null,
-    isLoading: true,
     quote: {},
     quoteSymbol: '',
     quoteIsLoading: true,
   };
 
-  componentDidMount() {
-    this.setState({ isLoading: false });
-  }
-
   handleQuoteChange = async symbol => {
-    const data = await this.getStockData(symbol);
-    const quote = data[0];
-    console.log(quote);
-    this.setState({ quote, quoteSymbol: symbol });
-    this.clearSearch();
-    this.setState({ quoteIsLoading: false });
-  };
-
-  getStockData = async val => {
     try {
       const res = await axios(
-        `https://www.worldtradingdata.com/api/v1/stock?symbol=${val}&api_token=J5Kh3eJUGOQ7Qj1tTVSjIcm6azCpvbRd6roOoMk23TLVpudmFuKlMDjkQVUq`
+        `https://www.worldtradingdata.com/api/v1/stock?symbol=${symbol}&api_token=J5Kh3eJUGOQ7Qj1tTVSjIcm6azCpvbRd6roOoMk23TLVpudmFuKlMDjkQVUq`
       );
       const data = res.data.data;
-      return data;
+      const quote = data[0];
+      console.log(quote);
+      this.setState({ quote, quoteSymbol: symbol, quoteIsLoading: false });
+      this.clearSearch();
     } catch (err) {
       console.log('Error fetching stock data', err);
     }
@@ -59,10 +48,6 @@ export default class Stock extends Component {
   };
 
   handleSearchChange = e => {
-    document.addEventListener('click', event => {
-      if (event.target.closest('.searchForm')) return;
-      this.clearSearch();
-    });
     this.search(e.target.value);
     this.setState({ searchValue: e.target.value });
   };
@@ -92,12 +77,11 @@ export default class Stock extends Component {
   render() {
     // prettier-ignore
     const {
-      cursor, quote, quoteIsLoading, searchValue, searchResults, isLoading,
+      cursor, quote, quoteIsLoading, searchValue, searchResults,
     } = this.state,
       { upColor, downColor } = this.props,
       currentQuoteColor = quote.day_change >= 0 ? upColor : downColor;
 
-    if (isLoading) return null;
     return (
       <div className="stock-grid">
         <div className="stock-grid__heading">
@@ -114,7 +98,6 @@ export default class Stock extends Component {
             handleSearchKeyDowns={this.handleSearchKeyDowns}
           />
         </div>
-
         {quoteIsLoading ? null : (
           <div
             className="stock-grid__info"

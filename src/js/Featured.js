@@ -1,36 +1,26 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import FeatureItem from './FeatureItem';
 
 const Featured = ({
+  featuredIsLoading,
   featuredStocks,
   handleQuoteChange,
   upColor,
   downColor,
 }) => {
+  if (featuredIsLoading) return null;
   return (
     <div className="featured-container">
       {featuredStocks.map(stock => {
-        const { symbol, name, price, day_change, change_pct } = stock;
-        const color = day_change >= 0 ? upColor : downColor;
+        const color = stock.day_change >= 0 ? upColor : downColor;
         return (
-          <div className="featured-container__item" key={symbol}>
-            <ul
-              className="featured-stock"
-              onClick={() => {
-                handleQuoteChange(symbol);
-              }}
-              style={{ cursor: 'pointer' }}
-            >
-              <li className="featured-stock__name">
-                {/* {name.substr(0, name.indexOf(' ')).toUpperCase()} */}
-                {name}
-              </li>
-              <li className="featured-stock__price">{price}</li>
-              <li className="featured-stock__change" style={{ color: color }}>
-                {`${day_change} (${change_pct}%)`}
-              </li>
-            </ul>
-          </div>
+          <FeatureItem
+            key={stock.symbol}
+            stock={stock}
+            color={color}
+            handleQuoteChange={handleQuoteChange}
+          />
         );
       })}
     </div>
