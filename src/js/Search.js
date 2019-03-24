@@ -7,6 +7,7 @@ const Search = ({
   handleSearchChange,
   handleQuoteChange,
   handleSearchKeyDowns,
+  handleBlur,
   searchValue,
   searchResults,
 }) => {
@@ -47,7 +48,7 @@ const Search = ({
                       : 'searchForm__result'
                   }
                   key={symbol}
-                  onClick={() => {
+                  onMouseDown={() => {
                     handleQuoteChange(symbol);
                   }}
                   style={{ cursor: 'pointer' }}
@@ -65,7 +66,11 @@ const Search = ({
 };
 
 Search.propTypes = {
+  clearSearch: PropTypes.func.isRequired,
+  cursor: PropTypes.number.isRequired,
   handleSearchChange: PropTypes.func.isRequired,
+  handleQuoteChange: PropTypes.func.isRequired,
+  handleSearchKeyDowns: PropTypes.func.isRequired,
   searchValue: PropTypes.string.isRequired,
   searchResults: PropTypes.array,
 };

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { HashRouter as Router, Route, Link } from 'react-router-dom';
 import './App.scss';
-// import axios from 'axios';
 import Markets from './js/Markets';
 import Stock from './js/Stock';
 import Forex from './js/Forex';

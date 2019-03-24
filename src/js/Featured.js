@@ -29,6 +29,8 @@ const Featured = ({
 
 Featured.propTypes = {
   featuredStocks: PropTypes.array.isRequired,
+  featuredIsLoading: PropTypes.bool.isRequired,
+  handleQuoteChange: PropTypes.func.isRequired,
   upColor: PropTypes.string.isRequired,
   downColor: PropTypes.string.isRequired,
 };
