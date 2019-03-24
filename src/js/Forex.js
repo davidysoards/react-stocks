@@ -11,20 +11,24 @@ export default class Forex extends Component {
     ratesAreLoading: true,
   };
 
+  // fetch the current exchange rates when the page loads
   componentDidMount() {
     this.getExchangeRates(this.state.currencyA);
   }
 
+  // use axios to fetch the exchange rates for the input value (USD)
   getExchangeRates = async val => {
     try {
       const res = await axios(
-        `https://www.worldtradingdata.com/api/v1/forex?base=${val}&sort=newest&api_token=J5Kh3eJUGOQ7Qj1tTVSjIcm6azCpvbRd6roOoMk23TLVpudmFuKlMDjkQVUq`
+        `https://www.worldtradingdata.com/api/v1/forex?base=${val}&sort=newest&api_token=${
+          this.props.apiKey
+        }`
       );
       const data = res.data.data;
       this.setState({
-        ratesAreLoading: false,
         valueB: data[this.state.currencyB],
         rates: data,
+        ratesAreLoading: false,
       });
       console.log(data);
     } catch (err) {
@@ -32,11 +36,13 @@ export default class Forex extends Component {
     }
   };
 
+  // set currency B rate and value of input B when the selector is changed
   onSelectCurrency = val => {
     const { valueA, rates } = this.state;
-    this.setState({ currencyB: val, valueB: valueA * rates[val] });
+    this.setState({ currencyB: val, valueB: (valueA * rates[val]).toFixed(6) });
   };
 
+  // calculate the value of the other input on input change
   handleInputChange = (e, input) => {
     const { currencyB, rates } = this.state;
     const rate = rates[currencyB];
@@ -44,14 +50,14 @@ export default class Forex extends Component {
       const newValue = e.target.value;
       this.setState({
         valueA: newValue,
-        valueB: newValue * rate,
+        valueB: (newValue * rate).toFixed(6),
       });
     }
     if (input === 'B') {
       const newValue = e.target.value;
       this.setState({
         valueB: newValue,
-        valueA: newValue / rate,
+        valueA: (newValue / rate).toFixed(6),
       });
     }
   };

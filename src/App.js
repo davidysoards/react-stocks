@@ -7,8 +7,11 @@ import Forex from './js/Forex';
 
 class App extends Component {
   render() {
+    // these colors used throughout app
     const upColor = '#1ac567',
-      downColor = '#ff333a';
+      downColor = '#ff333a',
+      // this key used to make all api calls
+      apiKey = 'J5Kh3eJUGOQ7Qj1tTVSjIcm6azCpvbRd6roOoMk23TLVpudmFuKlMDjkQVUq';
 
     return (
       <Router>
@@ -38,17 +41,30 @@ class App extends Component {
               exact
               path="/"
               render={props => (
-                <Markets {...props} upColor={upColor} downColor={downColor} />
+                <Markets
+                  {...props}
+                  upColor={upColor}
+                  downColor={downColor}
+                  apiKey={apiKey}
+                />
               )}
             />
             <Route
               exact
               path="/stock"
               render={props => (
-                <Stock {...props} upColor={upColor} downColor={downColor} />
+                <Stock
+                  {...props}
+                  upColor={upColor}
+                  downColor={downColor}
+                  apiKey={apiKey}
+                />
               )}
             />
-            <Route path="/forex" component={Forex} />
+            <Route
+              path="/forex"
+              render={props => <Forex {...props} apiKey={apiKey} />}
+            />
           </main>
           {/* =End Content */}
           <footer className="footer">

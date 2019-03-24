@@ -1,10 +1,36 @@
 .calculator {
   display: grid;
   grid-gap: 1rem;
-  &__input-A {
-    margin-bottom: 2em;
+  background: $light-gray;
+  padding: 1rem;
+  @include bp(med) {
+    grid-template-columns: 1fr 1fr;
+    justify-content: center;
+    align-items: center;
+
+    padding: 3.6rem;
+    border-radius: 4px;
+  }
+  &__currency-A {
+    margin-bottom: 1em;
+    @include bp(med) {
+      margin-bottom: 0;
+    }
   }
   &__label-A {
-    font-size: 1.5em;
+    font-size: 1.2em;
+  }
+  &__select-label {
+    padding-right: 0.5rem;
+  }
+  &__input--style {
+    padding: 0.5rem 1rem;
+    width: 100%;
+  }
+  &__input-A {
+    margin-top: 0.2rem;
+  }
+  &__input-B {
+    margin-top: 0.5rem;
   }
 }

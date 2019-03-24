@@ -1,13 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+// the search dropdown for the Stock Quote page
 const Search = ({
   clearSearch,
   cursor,
   handleSearchChange,
   handleQuoteChange,
   handleSearchKeyDowns,
-  handleBlur,
   searchValue,
   searchResults,
 }) => {
@@ -24,6 +24,7 @@ const Search = ({
             onKeyDown={handleSearchKeyDowns}
             onBlur={clearSearch}
           />
+          {/* if the search input value is not empty show the clear button */}
           {searchValue !== '' && (
             <button
               className="searchForm__clear"
@@ -36,6 +37,7 @@ const Search = ({
             </button>
           )}
         </div>
+        {/* if the search results and search input value are not empty show this dropdown */}
         {searchResults != null && searchValue !== '' && (
           <div className="searchForm__results">
             {searchResults.map((result, i) => {
@@ -48,6 +50,7 @@ const Search = ({
                       : 'searchForm__result'
                   }
                   key={symbol}
+                  // use onMouseDown instead of onClick because it fires before onBlur
                   onMouseDown={() => {
                     handleQuoteChange(symbol);
                   }}

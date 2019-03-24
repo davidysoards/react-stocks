@@ -1,3 +1,4 @@
+// Colors
 $black: #222222;
 $blue-gray: #282c34;
 $light-gray: #eeeeee;
@@ -8,8 +9,10 @@ $yellow: #ffc600;
 $green: #4caf50;
 $invalid: #cccccc;
 
+// Default Width
 $container-width: 1000px;
 
+// Media Queries
 @mixin bp($point) {
   @if $point == med {
     @media (min-width: 768px) {

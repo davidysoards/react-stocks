@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+// displays details for the chosed stock symbol
 const Quote = ({ quote, upColor, downColor }) => {
   // prettier-ignore
   const {

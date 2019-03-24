@@ -1,6 +1,8 @@
 import React from 'react';
 // import PropTypes from 'prop-types'
 
+// THIS COMPONENT IS NOT YET ACTIVE
+
 const Favorites = props => {
   return (
     <table className="favorites-table">

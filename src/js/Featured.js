@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import FeatureItem from './FeatureItem';
 
+// this is the container for the stock indexes on the Market page
+// maps over the featuredStocks array to create 3 featured Items
 const Featured = ({
   featuredIsLoading,
   featuredStocks,

@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+// pick a currency to convert from USD
+// send the value to onSelectCurrency to be used as a key for the data array
 const currencySelect = ({ currenciesArray, onSelectCurrency }) => {
   return (
     <select

@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+// the items inside the featured section
+// clicking on them shows the details for that item below the featured area
 const FeatureItem = ({ stock, color, handleQuoteChange }) => {
   const { symbol, name, price, day_change, change_pct } = stock;
   return (

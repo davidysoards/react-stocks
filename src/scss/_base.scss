@@ -1,12 +1,16 @@
+// base styles for the App, Markets, Stock, & Forex components
+h2 {
+  @include bp(med) {
+    font-size: 2em;
+  }
+}
+
 .app-container {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
   .header {
     background: $blue-gray;
-  }
-  .featured {
-    // background: $light-gray;
   }
   .main {
     flex: 1;
@@ -68,6 +72,19 @@
   display: grid;
   grid-gap: 1rem;
   max-width: $container-width;
+}
+
+.forex-grid {
+  @include bp(med) {
+    &__calculator {
+      display: grid;
+      justify-content: center;
+    }
+    &__heading,
+    &__exchange-rate {
+      text-align: center;
+    }
+  }
 }
 
 .footer-container {

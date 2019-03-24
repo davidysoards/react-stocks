@@ -9,6 +9,8 @@ const Calculator = ({
   handleInputChange,
   ratesAreLoading,
 }) => {
+  // names are for display in the selector
+  // values are sent to the onSelectCurrency function
   const currenciesArray = [
     { name: 'European Euros', value: 'EUR' },
     { name: 'Japanese Yen', value: 'JPY' },
@@ -23,15 +25,16 @@ const Calculator = ({
   if (ratesAreLoading) return null;
   return (
     <div className="calculator">
-      <div className="calculator__input-A">
+      {/* Currency A is always set to USD, but that could be changed in the future */}
+      <div className="calculator__currency-A">
         <label htmlFor="usd-input" className="calculator__label-A">
           US Dollars
         </label>
         <br />
         <input
+          className="calculator__input-A calculator__input--style"
           value={valueA}
           type="number"
-          maxLength="12"
           name="usd"
           id="usd-input"
           onChange={e => {
@@ -39,9 +42,9 @@ const Calculator = ({
           }}
         />
       </div>
-      <div className="calculator__input-B">
+      <div className="calculator__currency-B">
         <div className="calculator__select">
-          <label htmlFor="convert-select" className="calculator__label-B">
+          <label htmlFor="convert-select" className="calculator__select-label">
             Convert to:
           </label>
           <CurrencySelect
@@ -50,6 +53,7 @@ const Calculator = ({
           />
         </div>
         <input
+          className="calculator__input-B calculator__input--style"
           value={valueB}
           type="number"
           name="convert-to"

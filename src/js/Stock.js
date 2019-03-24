@@ -20,10 +20,13 @@ export default class Stock extends Component {
     quoteIsLoading: true,
   };
 
+  // fetch data for the chosen stock symbol using axios
   handleQuoteChange = async symbol => {
     try {
       const res = await axios(
-        `https://www.worldtradingdata.com/api/v1/stock?symbol=${symbol}&api_token=J5Kh3eJUGOQ7Qj1tTVSjIcm6azCpvbRd6roOoMk23TLVpudmFuKlMDjkQVUq`
+        `https://www.worldtradingdata.com/api/v1/stock?symbol=${symbol}&api_token=${
+          this.props.apiKey
+        }`
       );
       const data = res.data.data;
       const quote = data[0];
@@ -35,10 +38,15 @@ export default class Stock extends Component {
     }
   };
 
+  // search world trading data for available stock symbols that match the search input
+  // uses a utility function get() to generate axios cancel tokens when input is changed while requests are still pending
+  // and caches results to cut down on unecessary requests
   search = async val => {
     try {
       const res = await get(
-        `https://www.worldtradingdata.com/api/v1/stock_search?search_term=${val}&search_by=symbol,name&limit=50&page=1&api_token=J5Kh3eJUGOQ7Qj1tTVSjIcm6azCpvbRd6roOoMk23TLVpudmFuKlMDjkQVUq`
+        `https://www.worldtradingdata.com/api/v1/stock_search?search_term=${val}&search_by=symbol,name&limit=50&page=1&api_token=${
+          this.props.apiKey
+        }`
       );
       const searchResults = res.data;
       this.setState({ searchResults });
@@ -46,16 +54,19 @@ export default class Stock extends Component {
       console.log('No search results');
     }
   };
-
+  // handles changes to the search input
   handleSearchChange = e => {
     this.search(e.target.value);
     this.setState({ searchValue: e.target.value });
   };
 
+  // clears the search input and sets cursor value back to 0
   clearSearch = () => {
     this.setState({ searchValue: '', cursor: 0 });
   };
 
+  // handles behavior of Up, Down, Return, and Escape keys while using the search dropdown
+  // Up & Down navigate the dropdown using a cursor value, Return selects the symbol, Escape closes the dropdown
   handleSearchKeyDowns = e => {
     const { cursor, searchResults } = this.state;
     // Up Arrow
