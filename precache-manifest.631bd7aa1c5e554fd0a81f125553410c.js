@@ -12,23 +12,23 @@ self.__precacheManifest = [
     "url": "/react-stocks/static/js/runtime~main.2595b7c2.js"
   },
   {
-    "revision": "9b5ac692e4bc1175e31e",
-    "url": "/react-stocks/static/js/main.318be34a.chunk.js"
+    "revision": "b16852c590c1030d981c",
+    "url": "/react-stocks/static/js/main.ee88346e.chunk.js"
   },
   {
     "revision": "01b9b2aab5f88776b145",
     "url": "/react-stocks/static/js/2.06cd1661.chunk.js"
   },
   {
-    "revision": "9b5ac692e4bc1175e31e",
-    "url": "/react-stocks/static/css/main.3297ec78.chunk.css"
+    "revision": "b16852c590c1030d981c",
+    "url": "/react-stocks/static/css/main.85874289.chunk.css"
   },
   {
     "revision": "01b9b2aab5f88776b145",
     "url": "/react-stocks/static/css/2.96e49dc5.chunk.css"
   },
   {
-    "revision": "69bb05e7bcc1ae6dd9a1b9f790dddf87",
+    "revision": "7d5971832fbdec7c978c87750c800d71",
     "url": "/react-stocks/index.html"
   }
 ];
