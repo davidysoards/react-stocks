@@ -42,6 +42,7 @@ const Calculator = ({
           }}
         />
       </div>
+      {/* equals sign not visible on mobile */}
       <div className="calculator__equals-sign">=</div>
       <div className="calculator__currency-B">
         <div className="calculator__select">
