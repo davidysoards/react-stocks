@@ -12,6 +12,10 @@ This project was created using 'create-react-app'.
 
 Declarative routing was implemented with React Router 4. HashRouter was used for compatibility with GitHub pages.
 
+## React Transitions Group
+
+Crossfades between components were created with CSS and the help of TransitionsGroup and CSSTransitions from react-transitions-group.
+
 ## Sass & BEM
 
 I used SCSS and followed BEM (Block Element Modifier) methodology to write the styles for the components that make up this application.
