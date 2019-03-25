@@ -42,6 +42,7 @@ const Calculator = ({
           }}
         />
       </div>
+      <div className="calculator__equals-sign">=</div>
       <div className="calculator__currency-B">
         <div className="calculator__select">
           <label htmlFor="convert-select" className="calculator__select-label">

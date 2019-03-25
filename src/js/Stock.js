@@ -65,22 +65,25 @@ export default class Stock extends Component {
     this.setState({ searchValue: '', cursor: 0 });
   };
 
-  // handles behavior of Up, Down, Return, and Escape keys while using the search dropdown
-  // Up & Down navigate the dropdown using a cursor value, Return selects the symbol, Escape closes the dropdown
+  // handles behavior of Up, Down, Return, Escape & Delete keys while using the search dropdown
   handleSearchKeyDowns = e => {
-    const { cursor, searchResults } = this.state;
-    // Up Arrow
+    const { cursor, searchResults, searchValue } = this.state;
+    // Up Arrow -- navigate up
     if (e.keyCode === 38 && cursor > 0) {
       this.setState(prevState => ({ cursor: prevState.cursor - 1 }));
-      // Down Arrow
+      // Down Arrow -- navigate down
     } else if (e.keyCode === 40 && cursor < searchResults.length - 1) {
       this.setState(prevState => ({ cursor: prevState.cursor + 1 }));
-      // Return
+      // Return -- select symbol & show details
     } else if (e.keyCode === 13) {
       e.preventDefault();
       this.handleQuoteChange(searchResults[cursor].symbol);
-      // Esc
-    } else if (e.keyCode === 27) {
+      // Esc -- clear search and reset cursor
+    } else if (
+      e.keyCode === 27 ||
+      // Delete -- reset cursor when value is empty
+      (e.keyCode === 8 && searchValue.length <= 1)
+    ) {
       this.clearSearch();
     }
   };

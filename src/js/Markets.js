@@ -82,7 +82,9 @@ export default class Markets extends Component {
           </div>
         )}
         {/* section that shows details of clicked index */}
-        {quoteIsLoading ? null : (
+        {quoteIsLoading ? (
+          <div>Click Items for Details</div>
+        ) : (
           <div
             className="markets-grid__details"
             style={{ borderTop: `solid 1rem ${currentQuoteColor}` }}
