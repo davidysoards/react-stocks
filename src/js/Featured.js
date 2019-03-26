@@ -5,13 +5,11 @@ import FeatureItem from './FeatureItem';
 // this is the container for the stock indexes on the Market page
 // maps over the featuredStocks array to create 3 featured Items
 const Featured = ({
-  featuredIsLoading,
   featuredStocks,
   handleQuoteChange,
   upColor,
   downColor,
 }) => {
-  if (featuredIsLoading) return null;
   return (
     <div className="featured-container">
       {featuredStocks.map(stock => {
@@ -31,7 +29,6 @@ const Featured = ({
 
 Featured.propTypes = {
   featuredStocks: PropTypes.array.isRequired,
-  featuredIsLoading: PropTypes.bool.isRequired,
   handleQuoteChange: PropTypes.func.isRequired,
   upColor: PropTypes.string.isRequired,
   downColor: PropTypes.string.isRequired,

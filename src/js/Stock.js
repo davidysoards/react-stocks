@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import axios from 'axios';
 import { get } from './utils';
 import Search from './Search';
@@ -89,12 +90,15 @@ export default class Stock extends Component {
   };
 
   render() {
-    // prettier-ignore
     const {
-      cursor, quote, quoteIsLoading, searchValue, searchResults,
-    } = this.state,
-      { upColor, downColor } = this.props,
-      currentQuoteColor = quote.day_change >= 0 ? upColor : downColor;
+      cursor,
+      quote,
+      quoteIsLoading,
+      searchValue,
+      searchResults,
+    } = this.state;
+    const { upColor, downColor } = this.props;
+    const currentQuoteColor = quote.day_change >= 0 ? upColor : downColor;
 
     return (
       <div className="stock-grid">
@@ -112,14 +116,23 @@ export default class Stock extends Component {
             handleSearchKeyDowns={this.handleSearchKeyDowns}
           />
         </div>
-        {quoteIsLoading ? null : (
-          <div
-            className="stock-grid__info"
-            style={{ borderTop: `solid 1rem ${currentQuoteColor}` }}
-          >
-            <Quote upColor={upColor} downColor={downColor} quote={quote} />
-          </div>
-        )}
+        <div className="stock-grid__info">
+          {quoteIsLoading ? null : (
+            <TransitionGroup className="transition-group">
+              <CSSTransition
+                key={quote.symbol}
+                in={true}
+                appear={true}
+                timeout={500}
+                classNames="slide"
+              >
+                <section className="route-section">
+                  <Quote currentQuoteColor={currentQuoteColor} quote={quote} />
+                </section>
+              </CSSTransition>
+            </TransitionGroup>
+          )}
+        </div>
       </div>
     );
   }

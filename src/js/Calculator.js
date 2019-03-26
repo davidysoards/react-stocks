@@ -7,7 +7,6 @@ const Calculator = ({
   valueA,
   valueB,
   handleInputChange,
-  ratesAreLoading,
 }) => {
   // names are for display in the selector
   // values are sent to the onSelectCurrency function
@@ -22,7 +21,6 @@ const Calculator = ({
     { name: 'South African Rand', value: 'ZAR' },
   ];
 
-  if (ratesAreLoading) return null;
   return (
     <div className="calculator">
       {/* Currency A is always set to USD, but that could be changed in the future */}

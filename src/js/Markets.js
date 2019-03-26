@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import axios from 'axios';
 import Featured from './Featured';
 import Quote from './Quote';
@@ -56,14 +57,15 @@ export default class Markets extends Component {
   };
   render() {
     const {
-        featuredStocks,
-        quote,
-        featuredIsLoading,
-        quoteIsLoading,
-      } = this.state,
-      { upColor, downColor } = this.props,
-      currentQuoteColor = quote.day_change >= 0 ? upColor : downColor;
+      featuredStocks,
+      quote,
+      featuredIsLoading,
+      quoteIsLoading,
+    } = this.state;
+    const { upColor, downColor } = this.props;
+    const currentQuoteColor = quote.day_change >= 0 ? upColor : downColor;
 
+    if (featuredIsLoading) return null;
     return (
       <div className="markets-grid">
         <div className="markets-grid__heading">
@@ -82,16 +84,25 @@ export default class Markets extends Component {
           </div>
         )}
         {/* section that shows details of clicked index */}
-        {quoteIsLoading ? (
-          <div>Click Items for Details</div>
-        ) : (
-          <div
-            className="markets-grid__details"
-            style={{ borderTop: `solid 1rem ${currentQuoteColor}` }}
-          >
-            <Quote upColor={upColor} downColor={downColor} quote={quote} />
-          </div>
-        )}
+        <div className="markets-grid__info">
+          {quoteIsLoading ? (
+            <div>Click Items for Details</div>
+          ) : (
+            <TransitionGroup className="transition-group">
+              <CSSTransition
+                key={quote.symbol}
+                in={true}
+                appear={true}
+                timeout={500}
+                classNames="slide"
+              >
+                <section className="route-section">
+                  <Quote currentQuoteColor={currentQuoteColor} quote={quote} />
+                </section>
+              </CSSTransition>
+            </TransitionGroup>
+          )}
+        </div>
       </div>
     );
   }

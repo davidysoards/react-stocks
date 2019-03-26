@@ -71,6 +71,7 @@ export default class Forex extends Component {
       ratesAreLoading,
       rates,
     } = this.state;
+    if (ratesAreLoading) return null;
     return (
       <div className="forex-grid">
         <div className="forex-grid__heading">

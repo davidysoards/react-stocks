@@ -6,14 +6,14 @@ import Stock from './Stock';
 import Forex from './Forex';
 
 const Container = ({ location }) => {
-  // these colors used throughout app
-  const upColor = '#1ac567',
-    downColor = '#ff333a',
-    // this key used to make all api calls
-    apiKey = 'J5Kh3eJUGOQ7Qj1tTVSjIcm6azCpvbRd6roOoMk23TLVpudmFuKlMDjkQVUq';
+  // colors used throughout app
+  const upColor = '#1ac567';
+  const downColor = '#ff333a';
+  // key used to make all api calls
+  const apiKey = 'J5Kh3eJUGOQ7Qj1tTVSjIcm6azCpvbRd6roOoMk23TLVpudmFuKlMDjkQVUq';
   return (
     <TransitionGroup className="transition-group">
-      <CSSTransition key={location.pathname} timeout={1000} classNames="fade">
+      <CSSTransition key={location.pathname} timeout={700} classNames="fade">
         <section className="route-section">
           <Switch location={location}>
             <Route

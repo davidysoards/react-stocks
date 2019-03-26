@@ -2,16 +2,28 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 // displays details for the chosed stock symbol
-const Quote = ({ quote, upColor, downColor }) => {
-  // prettier-ignore
+const Quote = ({ quote, currentQuoteColor }) => {
   const {
-    name, symbol, price, stock_exchange_long, day_change, change_pct, price_open, day_high, day_low, volume, volume_avg,
-  } = quote,
+      name,
+      symbol,
+      price,
+      stock_exchange_long,
+      day_change,
+      change_pct,
+      price_open,
+      day_high,
+      day_low,
+      volume,
+      volume_avg,
+    } = quote,
     year_high = quote['52_week_high'],
-    year_low = quote['52_week_low'],
-    color = day_change >= 0 ? upColor : downColor;
+    year_low = quote['52_week_low'];
+
   return (
-    <div className="quote-grid">
+    <div
+      className="quote-grid"
+      style={{ borderTop: `solid 1rem ${currentQuoteColor}` }}
+    >
       <div className="quote-grid__header">
         <ul className="quote-header">
           <li className="quote-header__name-and-symbol">
@@ -22,7 +34,7 @@ const Quote = ({ quote, upColor, downColor }) => {
           <li className="quote-header__price">{price}</li>
           <li
             className="quote-header__change"
-            style={{ color: color }}
+            style={{ color: currentQuoteColor }}
           >{`${day_change} (${change_pct})%`}</li>
         </ul>
       </div>
@@ -58,8 +70,7 @@ const Quote = ({ quote, upColor, downColor }) => {
 
 Quote.propTypes = {
   quote: PropTypes.object.isRequired,
-  upColor: PropTypes.string.isRequired,
-  downColor: PropTypes.string.isRequired,
+  currentQuoteColor: PropTypes.string.isRequired,
 };
 
 export default Quote;
