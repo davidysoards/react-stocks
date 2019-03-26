@@ -12,9 +12,9 @@ This project was created using 'create-react-app'.
 
 Declarative routing was implemented with React Router 4. HashRouter was used for compatibility with GitHub pages.
 
-## React Transitions Group
+## Animations
 
-Crossfades between components were created with CSS and the help of TransitionsGroup and CSSTransitions from react-transitions-group.
+Crossfades between pages and component transitions were created with CSS and the help of TransitionsGroup and CSSTransitions from react-transitions-group.
 
 ## Sass & BEM
 
