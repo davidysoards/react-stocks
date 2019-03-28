@@ -8,10 +8,10 @@ import Main from './js/Main';
 function App() {
   return (
     <Router>
-      {/* homepage redirects to markets page */}
-      <Route exact path="/" render={() => <Redirect to="/markets" />} />
       <CSSTransition in={true} appear={true} timeout={500} classNames="fade">
         <div className="app-container">
+          {/* homepage redirects to markets page */}
+          <Route exact path="/" render={() => <Redirect to="/markets" />} />
           <header className="header">
             <Header />
           </header>
