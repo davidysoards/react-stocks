@@ -16,10 +16,6 @@ h2 {
     flex: 1;
     padding: 1rem;
   }
-  .footer {
-    flex-shrink: 0;
-    background: $blue-gray;
-  }
 }
 
 .header-grid {
@@ -85,11 +81,4 @@ h2 {
       text-align: center;
     }
   }
-}
-
-.footer-container {
-  text-align: center;
-  max-width: $container-width;
-  color: white;
-  margin: 1rem auto;
 }

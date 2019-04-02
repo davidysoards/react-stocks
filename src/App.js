@@ -19,10 +19,6 @@ function App() {
           <main className="main">
             <Main />
           </main>
-
-          <footer className="footer">
-            <div className="footer-container">© 2019 David Y. Soards</div>
-          </footer>
         </div>
       </CSSTransition>
     </Router>
