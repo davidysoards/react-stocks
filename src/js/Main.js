@@ -10,7 +10,7 @@ const Container = ({ location }) => {
   const upColor = '#1ac567';
   const downColor = '#ff333a';
   // key used to make all api calls
-  const apiKey = 'J5Kh3eJUGOQ7Qj1tTVSjIcm6azCpvbRd6roOoMk23TLVpudmFuKlMDjkQVUq';
+  const apiKey = process.env.REACT_APP_API_KEY;
   return (
     <TransitionGroup className="transition-group">
       <CSSTransition key={location.pathname} timeout={700} classNames="fade">
