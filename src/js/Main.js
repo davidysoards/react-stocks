@@ -9,7 +9,7 @@ const Container = ({ location }) => {
   // colors used throughout app
   const upColor = '#1ac567';
   const downColor = '#ff333a';
-  // key used to make all api calls
+  // api key stored in .env file which is not committed
   const apiKey = process.env.REACT_APP_API_KEY;
   return (
     <TransitionGroup className="transition-group">
