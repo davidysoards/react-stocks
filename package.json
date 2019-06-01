@@ -4,7 +4,7 @@
   "private": true,
   "homepage": "https://davidysoards.github.io/react-stocks",
   "dependencies": {
-    "axios": "^0.18.0",
+    "axios": "^0.19.0",
     "node-sass": "^4.11.0",
     "normalize.css": "^8.0.1",
     "react": "^16.8.4",
