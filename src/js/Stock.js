@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
-import axios from 'axios';
+// import axios from 'axios';
 import { get } from './utils';
 import Search from './Search';
 import Quote from './Quote';
@@ -16,40 +16,17 @@ export default class Stock extends Component {
     cursor: 0,
     searchValue: '',
     searchResults: null,
-    quote: {},
-    quoteSymbol: '',
-    quoteIsLoading: true,
-  };
-
-  // fetch data for the chosen stock symbol using axios
-  handleQuoteChange = async symbol => {
-    try {
-      const res = await axios(
-        `https://www.worldtradingdata.com/api/v1/stock?symbol=${symbol}&api_token=${
-          this.props.apiKey
-        }`
-      );
-      const data = res.data.data;
-      const quote = data[0];
-      console.log(quote);
-      this.setState({ quote, quoteSymbol: symbol, quoteIsLoading: false });
-      this.clearSearch();
-    } catch (err) {
-      console.log('Error fetching stock data', err);
-    }
   };
 
   // search world trading data for available stock symbols that match the search input
-  // uses a utility function get() to generate axios cancel tokens when input is changed while requests are still pending
-  // and caches results to cut down on unecessary requests
   search = async val => {
     try {
+      // uses a utility function get() to generate axios cancel tokens when input is changed while requests are still pending
       const res = await get(
-        `https://www.worldtradingdata.com/api/v1/stock_search?search_term=${val}&search_by=symbol,name&limit=50&page=1&api_token=${
-          this.props.apiKey
-        }`
+        `https://www.worldtradingdata.com/api/v1/stock_search?search_term=${val}&search_by=symbol,name&limit=50&page=1&api_token=${this.props.apiKey}`
       );
       const searchResults = res.data;
+      // cache results to cut down on unecessary requests
       this.setState({ searchResults });
     } catch (err) {
       console.log('No search results');
@@ -78,7 +55,8 @@ export default class Stock extends Component {
       // Return -- select symbol & show details
     } else if (e.keyCode === 13) {
       e.preventDefault();
-      this.handleQuoteChange(searchResults[cursor].symbol);
+      this.props.handleQuoteChange(searchResults[cursor].symbol);
+      this.clearSearch();
       // Esc -- clear search and reset cursor
     } else if (
       e.keyCode === 27 ||
@@ -90,14 +68,15 @@ export default class Stock extends Component {
   };
 
   render() {
+    const { cursor, searchValue, searchResults } = this.state;
     const {
-      cursor,
+      upColor,
+      downColor,
+      handleQuoteChange,
       quote,
       quoteIsLoading,
-      searchValue,
-      searchResults,
-    } = this.state;
-    const { upColor, downColor } = this.props;
+      historicData,
+    } = this.props;
     const currentQuoteColor = quote.day_change >= 0 ? upColor : downColor;
 
     return (
@@ -112,7 +91,7 @@ export default class Stock extends Component {
             searchValue={searchValue}
             searchResults={searchResults}
             handleSearchChange={this.handleSearchChange}
-            handleQuoteChange={this.handleQuoteChange}
+            handleQuoteChange={handleQuoteChange}
             handleSearchKeyDowns={this.handleSearchKeyDowns}
           />
         </div>
@@ -127,7 +106,11 @@ export default class Stock extends Component {
                 classNames="slide"
               >
                 <section className="route-section">
-                  <Quote currentQuoteColor={currentQuoteColor} quote={quote} />
+                  <Quote
+                    currentQuoteColor={currentQuoteColor}
+                    quote={quote}
+                    historicData={historicData}
+                  />
                 </section>
               </CSSTransition>
             </TransitionGroup>

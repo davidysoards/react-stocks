@@ -1,8 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Highcharts from 'highcharts/highstock';
+import HighchartsReact from 'highcharts-react-official';
 
 // displays details for the chosed stock symbol
-const Quote = ({ quote, currentQuoteColor }) => {
+const Quote = ({ quote, currentQuoteColor, historicData }) => {
   const {
       name,
       symbol,
@@ -63,6 +65,25 @@ const Quote = ({ quote, currentQuoteColor }) => {
             </tr>
           </tbody>
         </table>
+      </div>
+      <div className="quote-grid__highchart">
+        <HighchartsReact
+          highcharts={Highcharts}
+          constructorType={'stockChart'}
+          options={{
+            series: [
+              {
+                data: historicData,
+                tooltip: {
+                  valueDecimals: 2,
+                },
+              },
+            ],
+            credits: {
+              enabled: false,
+            },
+          }}
+        />
       </div>
     </div>
   );

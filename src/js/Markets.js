@@ -15,38 +15,18 @@ export default class Markets extends Component {
     featuredIsLoading: true,
     featuredStockSymbols: '^DJI,^SP400,^IXIC',
     featuredStocks: [],
-    quote: {},
-    quoteSymbol: '',
-    quoteIsLoading: true,
   };
+
   // get the stock indexes info when the page loads
   componentDidMount() {
     this.getFeaturedStocks(this.state.featuredStockSymbols);
   }
 
-  // fetch data for the chosen stock symbol
-  handleQuoteChange = async symbol => {
-    try {
-      const res = await axios(
-        `https://www.worldtradingdata.com/api/v1/stock?symbol=${symbol}&api_token=${
-          this.props.apiKey
-        }`
-      );
-      const data = res.data.data;
-      const quote = data[0];
-      console.log(quote);
-      this.setState({ quote, quoteSymbol: symbol, quoteIsLoading: false });
-    } catch (err) {
-      console.log('Error fetching stock data', err);
-    }
-  };
   // fetch info for the featuredStockSymbols
   getFeaturedStocks = async symbols => {
     try {
       const res = await axios(
-        `https://www.worldtradingdata.com/api/v1/stock?symbol=${symbols}&api_token=${
-          this.props.apiKey
-        }`
+        `https://www.worldtradingdata.com/api/v1/stock?symbol=${symbols}&api_token=${this.props.apiKey}`
       );
       const featuredStocks = res.data.data;
       this.setState({ featuredStocks, featuredIsLoading: false });
@@ -56,13 +36,15 @@ export default class Markets extends Component {
     }
   };
   render() {
+    const { featuredStocks, featuredIsLoading } = this.state;
     const {
-      featuredStocks,
+      upColor,
+      downColor,
+      handleQuoteChange,
       quote,
-      featuredIsLoading,
       quoteIsLoading,
-    } = this.state;
-    const { upColor, downColor } = this.props;
+      historicData,
+    } = this.props;
     const currentQuoteColor = quote.day_change >= 0 ? upColor : downColor;
 
     if (featuredIsLoading) return null;
@@ -79,7 +61,7 @@ export default class Markets extends Component {
               featuredStocks={featuredStocks}
               upColor={upColor}
               downColor={downColor}
-              handleQuoteChange={this.handleQuoteChange}
+              handleQuoteChange={handleQuoteChange}
             />
           </div>
         )}
@@ -97,7 +79,11 @@ export default class Markets extends Component {
                 classNames="slide"
               >
                 <section className="route-section">
-                  <Quote currentQuoteColor={currentQuoteColor} quote={quote} />
+                  <Quote
+                    currentQuoteColor={currentQuoteColor}
+                    quote={quote}
+                    historicData={historicData}
+                  />
                 </section>
               </CSSTransition>
             </TransitionGroup>

@@ -2,6 +2,20 @@
   display: grid;
   grid-gap: 1em;
   padding-top: 1rem;
+  @include bp(med) {
+    grid-template-areas:
+      'a b'
+      'c c';
+    &__header {
+      grid-area: a;
+    }
+    &__details {
+      grid-area: b;
+    }
+    &__highchart {
+      grid-area: c;
+    }
+  }
 }
 
 .quote-header {
