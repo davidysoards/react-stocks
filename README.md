@@ -29,6 +29,10 @@ By caching the searches and using cancel tokens I was able to greatly reduce the
 
 The data for this application comes World Trading Data. Sign up for a free account [here](https://www.worldtradingdata.com/).
 
+## Highcharts
+
+Data visualizations use Highcharts - Highstock and the official React Wrapper.
+
 ### Code Louisville
 
 This app is my final project for the January 2019 JavaScript/React cohort.
