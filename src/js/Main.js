@@ -46,7 +46,7 @@ const Container = ({ location }) => {
       const data = res.data.data;
       const stockQuote = data[0];
       setQuote(stockQuote);
-      console.log(stockQuote);
+      // console.log(stockQuote);
     } catch (err) {
       console.log('Error fetching stock data', err);
     }
@@ -60,7 +60,7 @@ const Container = ({ location }) => {
       );
       const data = res.data.history;
       const formattedData = formatForHighcharts(data);
-      console.log(formattedData);
+      // console.log(formattedData);
       setHistoricData(formattedData);
       setQuoteIsLoading(false);
     } catch (err) {

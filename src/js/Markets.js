@@ -30,7 +30,7 @@ export default class Markets extends Component {
       );
       const featuredStocks = res.data.data;
       this.setState({ featuredStocks, featuredIsLoading: false });
-      console.log(featuredStocks);
+      // console.log(featuredStocks);
     } catch (err) {
       console.log('Error fetching featured stocks', err);
     }

@@ -30,7 +30,7 @@ export default class Forex extends Component {
         rates: data,
         ratesAreLoading: false,
       });
-      console.log(data);
+      // console.log(data);
     } catch (err) {
       console.log('Error fetching stock data', err);
     }
