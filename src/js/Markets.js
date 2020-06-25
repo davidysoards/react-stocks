@@ -13,7 +13,7 @@ export default class Markets extends Component {
 
   state = {
     featuredIsLoading: true,
-    featuredStockSymbols: '^DJI,^SP400,^IXIC',
+    featuredStockSymbols: 'AAPL,MSFT,NFLX',
     featuredStocks: [],
   };
 
@@ -26,9 +26,10 @@ export default class Markets extends Component {
   getFeaturedStocks = async symbols => {
     try {
       const res = await axios(
-        `https://www.worldtradingdata.com/api/v1/stock?symbol=${symbols}&api_token=${this.props.apiKey}`
+        `https://api.marketstack.com/v1/eod?symbols=${symbols}&access_key=${this.props.apiKey}`
       );
-      const featuredStocks = res.data.data;
+      const featuredStocks = res.data.data.slice(0,3)
+      console.log(featuredStocks);
       this.setState({ featuredStocks, featuredIsLoading: false });
       // console.log(featuredStocks);
     } catch (err) {

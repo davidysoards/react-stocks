@@ -23,7 +23,7 @@ export default class Stock extends Component {
     try {
       // uses a utility function get() to generate axios cancel tokens when input is changed while requests are still pending
       const res = await get(
-        `https://www.worldtradingdata.com/api/v1/stock_search?search_term=${val}&search_by=symbol,name&limit=50&page=1&api_token=${this.props.apiKey}`
+        `https://api.marketstack.com/v1/stock_search?search_term=${val}&search_by=symbol,name&limit=50&page=1&access_key=${this.props.apiKey}`
       );
       const searchResults = res.data;
       // cache results to cut down on unecessary requests

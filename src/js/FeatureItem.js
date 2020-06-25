@@ -16,6 +16,7 @@ const FeatureItem = ({ stock, color, handleQuoteChange }) => {
       >
         <li className="featured-stock__name">{name}</li>
         <li className="featured-stock__price">{price}</li>
+        <li className="featured-stock__price">{symbol}</li>{/* added since new API*/}
         <li className="featured-stock__change" style={{ color: color }}>
           {`${day_change} (${change_pct}%)`}
         </li>

@@ -41,7 +41,7 @@ const Container = ({ location }) => {
   const fetchRealtimeData = async symbol => {
     try {
       const res = await axios(
-        `https://www.worldtradingdata.com/api/v1/stock?symbol=${symbol}&api_token=${apiKey}`
+        `https://api.marketstack.com/v1/intraday?symbols=${symbol}&access_key=${apiKey}`
       );
       const data = res.data.data;
       const stockQuote = data[0];
@@ -56,7 +56,7 @@ const Container = ({ location }) => {
     const dateFrom = todaysDate(1);
     try {
       const res = await axios(
-        `https://api.worldtradingdata.com/api/v1/history?symbol=${symbol}&date_from=${dateFrom}&sort=oldest&api_token=${apiKey}`
+        `https://api.marketstack.com/v1/eod?symbols=${symbol}&date_from=${dateFrom}&sort=DESC&access_key=${apiKey}`
       );
       const data = res.data.history;
       const formattedData = formatForHighcharts(data);

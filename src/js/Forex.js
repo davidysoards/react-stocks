@@ -20,7 +20,7 @@ export default class Forex extends Component {
   getExchangeRates = async val => {
     try {
       const res = await axios(
-        `https://www.worldtradingdata.com/api/v1/forex?base=${val}&sort=newest&api_token=${
+        `https://api.marketstack.com/v1/forex?base=${val}&sort=newest&access_key=${
           this.props.apiKey
         }`
       );
