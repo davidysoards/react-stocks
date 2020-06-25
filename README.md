@@ -4,6 +4,10 @@
 
 This project is deployed via GitHub pages at [React Stocks](https://davidysoards.github.io/react-stocks).
 
+Sadly the World Trading Data API has gone kaput. They have a new product, marketstack, that is similar but completely different and lacks some of the functionality of the old API.
+
+I started to switch it over, but it hardly seems worth the effort.
+
 ## Create React App
 
 This project was created using 'create-react-app'.
@@ -27,7 +31,7 @@ By caching the searches and using cancel tokens I was able to greatly reduce the
 
 ## World Trading Data
 
-The data for this application comes World Trading Data. Sign up for a free account [here](https://www.worldtradingdata.com/).
+~~The data for this application comes World Trading Data. Sign up for a free account [here](https://www.worldtradingdata.com/).~~
 
 ## Highcharts
 
